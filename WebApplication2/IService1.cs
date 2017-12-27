@@ -13,8 +13,5 @@ namespace WebApplication2
     {
         [OperationContract]
         string configureQuerryString(string author, string book, string date, string name, string password, string token);
-
-        [OperationContract]
-        string pay(String name, String password);
     }
 }

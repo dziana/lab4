@@ -12,21 +12,10 @@ namespace WebApplication2
 {
     // ПРИМЕЧАНИЕ. Команду "Переименовать" в меню "Рефакторинг" можно использовать для одновременного изменения имени класса "Service1" в коде, SVC-файле и файле конфигурации.
     // ПРИМЕЧАНИЕ. Чтобы запустить клиент проверки WCF для тестирования службы, выберите элементы Service1.svc или Service1.svc.cs в обозревателе решений и начните отладку.
+    
     public class Service1 : IService1
     {
-        private static string GetLocalIPAddress()
-        {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return ip.ToString();
-                }
-            }
-            throw new Exception("No network adapters with an IPv4 address in the system!");
-        }
-
+       
         private String makeDate(String s)
         {
             String res = "{ d '";
@@ -35,21 +24,6 @@ namespace WebApplication2
             return res;
         }
 
-        public string pay(String name, String password)
-        {
-
-            /*string url = "http://payment-service-uni.apphb.com/PaymentREST.svc/pay?name=" + name + "&password=" + password;
-            using (var webClient = new WebClient())
-            {
-                // Выполняем запрос по адресу и получаем ответ в виде строки 
-                var response = webClient.DownloadString(url);
-                var JSONObj = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize < System.Collections.Generic.Dictionary < string, string»(response);
-                token = JSONObj["d"];
-                btPay.Text = token;
-            }*/
-            return "";
-
-        }
         private bool isPaid(String name, String token)
         {
             string url = "http://payment-service-uni.apphb.com/PaymentREST.svc/checkPa.." + name + "&token=" + token +
@@ -65,12 +39,12 @@ namespace WebApplication2
                 else
                     return false;
             }
-            //return Convert.ToBoolean(serv.checkPayment(name, token, GetLocalIPAddress(), HttpContext.Current.Request.UserAgent)); 
+           
         }
 
         public String configureQuerryString(string author, string book, string date, string name, string password, string token)
         {
-           // serv = new ServiceReference1.PaymentRESTClient();
+         
             if (!isPaid(name, token))
                 return null;
            
